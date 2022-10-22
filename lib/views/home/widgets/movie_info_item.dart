@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intern_task/data/models/network_movie/network_movie_model.dart';
+import 'package:intern_task/views/home/downloaded_movie/cubit/download_movie/download_movie_cubit.dart';
 import 'package:shimmer/shimmer.dart';
 
 class MovieInfoItem extends StatelessWidget {
@@ -56,6 +58,14 @@ class MovieInfoItem extends StatelessWidget {
                   maxLines: 2,
                   style: const TextStyle(color: Colors.black, fontSize: 15),
                 ),
+              ),
+              IconButton(
+                onPressed: () {
+                  context
+                      .read<DownloadMovieCubit>()
+                      .downloadMovie(movieModel: movieModel);
+                },
+                icon: const Icon(Icons.download),
               ),
             ],
           ),

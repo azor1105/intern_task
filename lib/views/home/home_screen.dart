@@ -1,7 +1,10 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intern_task/core/constants/router_names.dart';
+import 'package:intern_task/core/utils/get_toast.dart';
 import 'package:intern_task/data/repositories/network_movie_repository.dart';
+import 'package:intern_task/views/home/downloaded_movie/cubit/download_movie/download_movie_cubit.dart';
 import 'package:intern_task/views/home/widgets/movie_info_item.dart';
 import 'package:video_player/video_player.dart';
 
@@ -23,6 +26,20 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          BlocListener<DownloadMovieCubit, DownloadMovieState>(
+            listener: (context, state) {
+              if (state.status == DownloadMovieStatus.downloadingOnFailure) {
+                GetToast.getMyToast(message: "Try again");
+              } else if (state.status ==
+                  DownloadMovieStatus.downloadingOnProgress) {
+                GetToast.getMyToast(message: "Dowloading...");
+              } else if (state.status ==
+                  DownloadMovieStatus.downloadingOnSuccess) {
+                GetToast.getMyToast(message: "Successfully downloaded");
+              }
+            },
+            child: const SizedBox(),
+          ),
           Expanded(
             child: ListView(
               physics: const BouncingScrollPhysics(),

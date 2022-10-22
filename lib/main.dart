@@ -7,8 +7,9 @@ import 'package:intern_task/data/repositories/movie_download_repository.dart';
 import 'package:intern_task/data/repositories/network_movie_repository.dart';
 import 'package:intern_task/data/service/api/api_service.dart';
 import 'package:intern_task/data/service/hive_service/hive_service.dart';
-import 'package:intern_task/views/home/cubit/download_movie/download_movie_cubit.dart';
 import 'package:intern_task/views/router/router.dart';
+
+import 'views/home/downloaded_movie/cubit/download_movie/download_movie_cubit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
