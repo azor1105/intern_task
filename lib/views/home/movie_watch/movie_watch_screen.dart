@@ -51,7 +51,8 @@ class _OnlineMovieWatchScreenState extends State<OnlineMovieWatchScreen> {
 
   @override
   void dispose() {
-    _controller?.dispose();
+    _controller!.pause();
+    _controller!.dispose();
     super.dispose();
   }
 }
