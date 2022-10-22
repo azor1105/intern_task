@@ -1,4 +1,3 @@
-import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intern_task/core/constants/router_names.dart';
@@ -6,7 +5,6 @@ import 'package:intern_task/core/utils/get_toast.dart';
 import 'package:intern_task/data/repositories/network_movie_repository.dart';
 import 'package:intern_task/views/home/downloaded_movie/cubit/download_movie/download_movie_cubit.dart';
 import 'package:intern_task/views/home/widgets/movie_info_item.dart';
-import 'package:video_player/video_player.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,6 +20,18 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text("Movies"),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.read<DownloadMovieCubit>().getDownloadedMovies();
+              Navigator.pushNamed(
+                context,
+                RouteNames.downloadedMovie,
+              );
+            },
+            icon: const Icon(Icons.download_done),
+          ),
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

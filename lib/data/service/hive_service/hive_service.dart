@@ -4,18 +4,18 @@ import 'package:intern_task/data/models/downloaded_movie/downloaded_movie.dart';
 class HiveService {
   Box<DownloadedMovie>? downloadedMovieBox;
 
-  Future<Box> openbox() async {
+  Future<Box<DownloadedMovie>> openbox() async {
     downloadedMovieBox ??=
         await Hive.openBox<DownloadedMovie>("downloaded_movie");
     return downloadedMovieBox!;
   }
 
-  List<DownloadedMovie> getCachedPrayers(Box box) {
+  List<DownloadedMovie> getDownloadedMovies(Box box) {
     return box.values.toList().cast<DownloadedMovie>();
   }
 
-  Future<void> addMovie(DownloadedMovie cachedPrayerModel) async {
-    await downloadedMovieBox!.add(cachedPrayerModel);
+  Future<void> addMovie(Box box, DownloadedMovie cachedPrayerModel) async {
+    await box.add(cachedPrayerModel);
   }
 
   Future<void> deleteAllCachedPrayer(Box box) async {
