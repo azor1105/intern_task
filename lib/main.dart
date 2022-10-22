@@ -25,7 +25,7 @@ Future<void> main() async {
           hiveService: hiveService,
           apiService: ApiService.instance,
         ),
-      ),
+      )..getDownloadedMovies(),
       child: const App(),
     ),
   );

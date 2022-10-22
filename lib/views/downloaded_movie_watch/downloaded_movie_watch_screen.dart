@@ -1,29 +1,30 @@
 import 'dart:io';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:intern_task/data/models/downloaded_movie/downloaded_movie.dart';
 import 'package:video_player/video_player.dart';
 
 class DownloadedMovieWatchScreen extends StatefulWidget {
-  File? sub1;
   DownloadedMovieWatchScreen({
-    required this.sub1,
-  });
+    Key? key,
+    required this.downloadedMovie,
+  }) : super(key: key);
+  DownloadedMovie downloadedMovie;
   @override
-  State<DownloadedMovieWatchScreen> createState() => _DownloadedMovieWatchScreenState(sub1: sub1);
+  State<DownloadedMovieWatchScreen> createState() =>
+      _DownloadedMovieWatchScreenState();
 }
 
-class _DownloadedMovieWatchScreenState extends State<DownloadedMovieWatchScreen> {
-  File? sub1;
-  _DownloadedMovieWatchScreenState({
-    required this.sub1,
-  });
+class _DownloadedMovieWatchScreenState
+    extends State<DownloadedMovieWatchScreen> {
+  _DownloadedMovieWatchScreenState();
   VideoPlayerController? _controller;
 
   @override
   void initState() {
     super.initState();
 
-    _controller = VideoPlayerController.file(sub1!)
+    _controller = VideoPlayerController.file(File(widget.downloadedMovie.path))
       ..initialize().then((_) {
         setState(() {});
       });
@@ -37,6 +38,10 @@ class _DownloadedMovieWatchScreenState extends State<DownloadedMovieWatchScreen>
       looping: true,
     );
     return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.downloadedMovie.name),
+        centerTitle: true,
+      ),
       body: Center(
         child: _controller!.value.isInitialized
             ? AspectRatio(
