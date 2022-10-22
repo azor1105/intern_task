@@ -5,7 +5,7 @@ import 'package:intern_task/views/router/router.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  NetworkMovieRepository.init();
+  NetworkMovieRepository.instance.getNetworkMovies();
   runApp(const App());
 }
 
