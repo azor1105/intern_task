@@ -4,7 +4,11 @@ import 'package:intern_task/data/models/network_movie/network_movie_model.dart';
 import 'package:shimmer/shimmer.dart';
 
 class MovieInfoItem extends StatelessWidget {
-  const MovieInfoItem({super.key, required this.movieModel});
+  const MovieInfoItem({
+    super.key,
+    required this.movieModel,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,7 @@ class MovieInfoItem extends StatelessWidget {
           ),
           backgroundColor: const Color(0xFFE5E5E5),
         ),
-        onPressed: () {},
+        onPressed: onPressed,
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Row(
@@ -60,5 +64,6 @@ class MovieInfoItem extends StatelessWidget {
     );
   }
 
+  final VoidCallback onPressed;
   final NetworkMovieModel movieModel;
 }
