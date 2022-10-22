@@ -14,7 +14,7 @@ class HiveService {
     return box.values.toList().cast<DownloadedMovie>();
   }
 
-  Future<void> addCachedPrayer(DownloadedMovie cachedPrayerModel) async {
+  Future<void> addMovie(DownloadedMovie cachedPrayerModel) async {
     await downloadedMovieBox!.add(cachedPrayerModel);
   }
 
